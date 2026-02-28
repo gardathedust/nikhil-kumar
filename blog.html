@@ -90,18 +90,26 @@
             overflow: hidden;
         }
         
-        .read-more {
-            color: #e65100;
-            text-decoration: none;
-            font-weight: 500;
+        .read-more-btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            transition: color 0.3s ease;
+            background: #e65100;
+            color: #fff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 0.4rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(230, 81, 0, 0.18);
         }
         
-        .read-more:hover {
-            color: #f57c00;
+        .read-more-btn:hover {
+            background: #bf360c;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(230, 81, 0, 0.25);
+            color: #fff;
             text-decoration: none;
         }
 
@@ -139,9 +147,8 @@
                         <div class="blog-date">February 28, 2026</div>
                         <h2 class="blog-title">AI-Powered SQL Automation for Product Managers</h2>
                         <p class="blog-excerpt">A privacy-safe, org-agnostic framework to automate SQL data extraction, quality checks, and insight generation using AI — without exposing raw data to external models...</p>
-                        <a href="blog-posts/ai-sql-automation-for-pms.html" class="read-more">
-                            Read More
-                            <i class="fas fa-arrow-right"></i>
+                        <a href="blog-posts/ai-sql-automation-for-pms.html" class="read-more-btn">
+                            Read More <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </article>
@@ -152,9 +159,8 @@
                         <div class="blog-date">January 8, 2025</div>
                         <h2 class="blog-title">Framework to Identify and Start a Business</h2>
                         <p class="blog-excerpt">A practical framework covering what kind of business to pick, the factors that help you scale big, the three core areas of business activity, and the essential Business 101 skills every aspiring entrepreneur should learn.</p>
-                        <a href="blog-posts/framework-to-identify-and-start-a-business.html" class="read-more">
-                            Read More
-                            <i class="fas fa-arrow-right"></i>
+                        <a href="blog-posts/framework-to-identify-and-start-a-business.html" class="read-more-btn">
+                            Read More <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
                 </article>
