@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered SQL Automation for Product Managers - Nikhil Kumar</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A privacy-safe, org-agnostic framework to automate SQL data extraction, quality checks, and insight generation using AI — without exposing raw data to external models.">
+    <meta name="keywords" content="AI SQL automation, product management, data analysis, LLM, RAG, privacy-safe AI, SQL generation, data quality">
+    <meta name="author" content="Nikhil Kumar">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI-Powered SQL Automation for Product Managers">
+    <meta property="og:description" content="A privacy-safe framework to automate SQL data extraction, quality checks, and insight generation using AI.">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI-Powered SQL Automation for Product Managers">
+    <meta name="twitter:description" content="A privacy-safe framework to automate SQL data extraction, quality checks, and insight generation using AI.">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .blog-post {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(to bottom, #fff3e0, #fff);
+        }
+
+        .blog-post-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .blog-header {
+            margin-bottom: 2rem;
+        }
+
+        .blog-title {
+            font-size: 2.5rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e65100;
+            padding-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .blog-meta {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .blog-body {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #4b5563;
+        }
+
+        .blog-body h2 {
+            color: #1e293b;
+            margin: 2.5rem 0 1rem;
+            border-left: 3px solid #e65100;
+            padding-left: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .blog-body h3 {
+            color: #1e293b;
+            margin: 1.8rem 0 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .blog-body p {
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-body ul, .blog-body ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .blog-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-body strong {
+            color: #1e293b;
+        }
+
+        .blog-body code {
+            background: #f3f4f6;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+            color: #e65100;
+        }
+
+        /* Callout boxes */
+        .callout {
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .callout-privacy {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .callout-tip {
+            background: #ecfdf5;
+            border: 1px solid #10b981;
+            border-left: 4px solid #10b981;
+        }
+
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .callout-privacy .callout-title { color: #92400e; }
+        .callout-tip .callout-title { color: #065f46; }
+
+        .callout p {
+            font-size: 0.95rem;
+            margin-bottom: 0 !important;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .comparison-table thead th {
+            background: #e65100;
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table tbody td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            color: #4b5563;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .comparison-table tbody td:first-child {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* Privacy two-column grid */
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .privacy-box {
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+        }
+
+        .privacy-box.safe {
+            background: #ecfdf5;
+            border: 1px solid #10b981;
+        }
+
+        .privacy-box.blocked {
+            background: #fef2f2;
+            border: 1px solid #ef4444;
+        }
+
+        .privacy-box h4 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .privacy-box.safe h4 { color: #065f46; }
+        .privacy-box.blocked h4 { color: #991b1b; }
+
+        .privacy-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .privacy-box ul li {
+            padding: 0.25rem 0;
+            margin: 0;
+        }
+
+        .privacy-box.safe ul li { color: #065f46; }
+        .privacy-box.blocked ul li { color: #991b1b; }
+
+        /* Step cards */
+        .step-card {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            padding-left: 4rem;
+        }
+
+        .step-card .step-num {
+            position: absolute;
+            left: 1.25rem;
+            top: 1.5rem;
+            width: 32px;
+            height: 32px;
+            background: #e65100;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .step-card h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-card p {
+            margin-bottom: 0.75rem;
+        }
+
+        .step-card ul {
+            margin-bottom: 0;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.75rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 0.3rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .tag-tool { background: #dbeafe; color: #1e40af; }
+        .tag-concept { background: #ede9fe; color: #5b21b6; }
+        .tag-privacy { background: #fef3c7; color: #92400e; }
+
+        /* Architecture flow */
+        .flow-bar {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+        }
+
+        .flow-item {
+            flex-shrink: 0;
+            text-align: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            min-width: 100px;
+        }
+
+        .flow-item.user { background: #e65100; color: white; }
+        .flow-item.internal { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+        .flow-item.external { background: #fef3c7; color: #92400e; border: 1px solid #fbbf24; }
+        .flow-item.output { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+
+        .flow-arrow {
+            flex-shrink: 0;
+            color: #9ca3af;
+            font-size: 1.2rem;
+            padding: 0 0.25rem;
+        }
+
+        /* Comments section */
+        .comments-section {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .comment-form {
+            margin-bottom: 2rem;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .comment-form input[type="text"] {
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            width: 100%;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+        }
+
+        .comment-form button {
+            background-color: #e65100;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .comment-form button:hover {
+            background-color: #f57c00;
+        }
+
+        .comment-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comment {
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            background-color: #fff;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .comment-content {
+            color: #4b5563;
+        }
+
+        .btn.primary {
+            background-color: #e65100;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn.primary:hover {
+            background-color: #f57c00;
+        }
+
+        @media (max-width: 768px) {
+            .blog-title { font-size: 1.75rem; }
+            .privacy-grid { grid-template-columns: 1fr; }
+            .flow-bar { flex-wrap: wrap; gap: 0.5rem; }
+            .flow-arrow { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">NK</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="blog-post">
+        <div class="blog-post-content">
+            <article>
+                <header class="blog-header">
+                    <h1 class="blog-title">AI-Powered SQL Automation for Product Managers</h1>
+                    <div class="blog-meta">
+                        <span class="date">February 28, 2026</span>
+                        <span class="author">by Nikhil Kumar</span>
+                    </div>
+                </header>
+
+                <div class="blog-body">
+                    <p>Product managers spend 30–50% of their time writing SQL queries, cross-referencing schemas across multiple databases, running data quality checks, and manually interpreting results. This is repetitive, error-prone, and a poor use of PM time.</p>
+
+                    <p>What if you could <strong>ask questions in plain English</strong> — and get back validated SQL, quality-checked results, and business-readable insights — all without exposing a single row of data to an external AI model?</p>
+
+                    <p>This post lays out a <strong>privacy-safe, org-agnostic framework</strong> for automating the entire data analysis pipeline. It works with any database stack, any team size, and any data sensitivity level.</p>
+
+                    <div class="callout callout-privacy">
+                        <div class="callout-title">🔒 Core Privacy Guarantee</div>
+                        <p>The AI model <strong>never sees your actual data</strong>. Only schema structure (metadata) is sent to cloud APIs. All query execution and data processing happens entirely within your own infrastructure.</p>
+                    </div>
+
+                    <h2>How It Works — The 30-Second Version</h2>
+
+                    <div class="flow-bar">
+                        <div class="flow-item user">You Ask</div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-item internal">Find Tables<br><small>Schema RAG</small></div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-item external">Generate SQL<br><small>LLM (schema only)</small></div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-item internal">Validate<br><small>Safety checks</small></div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-item output">Run & QC<br><small>Local execution</small></div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-item external">Insights<br><small>Stats → LLM</small></div>
+                        <span class="flow-arrow">→</span>
+                        <div class="flow-item user">📊</div>
+                    </div>
+
+                    <p>You type a question like <em>"What's the monthly churn rate by region?"</em> The system finds the relevant tables using a vector-indexed schema registry, sends only the schema metadata to an LLM to generate SQL, validates it for safety, runs it locally, runs quality checks, then sends aggregate statistics (never raw rows) to the LLM for a business narrative.</p>
+
+                    <h2>The Privacy Model</h2>
+
+                    <p>This is the most important design decision in the entire system: <strong>what crosses the network boundary and what doesn't.</strong></p>
+
+                    <div class="privacy-grid">
+                        <div class="privacy-box safe">
+                            <h4>✅ Can Be Sent to Cloud APIs</h4>
+                            <ul>
+                                <li>• Table and column names</li>
+                                <li>• Data types and constraints</li>
+                                <li>• Primary/foreign key relationships</li>
+                                <li>• Semantic descriptions you add</li>
+                                <li>• Aggregate statistics (counts, means)</li>
+                                <li>• QC flags ("23% nulls in column X")</li>
+                                <li>• The user's natural language question</li>
+                            </ul>
+                        </div>
+                        <div class="privacy-box blocked">
+                            <h4>🚫 Never Leaves Your Network</h4>
+                            <ul>
+                                <li>• Individual data rows</li>
+                                <li>• Personally identifiable information</li>
+                                <li>• Transaction-level data</li>
+                                <li>• User behavior / event logs</li>
+                                <li>• Financial figures at row level</li>
+                                <li>• Database credentials</li>
+                                <li>• Any business-sensitive raw data</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h2>The 9-Step Implementation</h2>
+
+                    <p>Each step is independent enough that you can build incrementally. Start with Steps 1–3 for a working prototype, then layer on the rest.</p>
+
+                    <div class="step-card">
+                        <span class="step-num">1</span>
+                        <h3>Schema Registry — Build a Metadata Layer</h3>
+                        <p>Auto-introspect your databases by querying <code>INFORMATION_SCHEMA</code> or using tools like dbt docs. Add semantic annotations (e.g., <code>users.ltv</code> → "Lifetime value in USD, updated monthly"). Map cross-database join paths.</p>
+                        <div class="tag-row">
+                            <span class="tag tag-tool">SQLite</span>
+                            <span class="tag tag-tool">JSON/YAML</span>
+                            <span class="tag tag-tool">dbt docs</span>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">2</span>
+                        <h3>Schema Context Selector — Smart Retrieval</h3>
+                        <p>You can't dump hundreds of tables into an LLM prompt. Use embedding-based retrieval (RAG) to find just the relevant tables for each question. Maintain a keyword-based fallback taxonomy for edge cases.</p>
+                        <div class="tag-row">
+                            <span class="tag tag-tool">ChromaDB</span>
+                            <span class="tag tag-tool">FAISS</span>
+                            <span class="tag tag-concept">RAG Pattern</span>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">3</span>
+                        <h3>SQL Generation via LLM</h3>
+                        <p>The AI receives the retrieved schema context (not raw data) along with your question and produces syntactically correct SQL for the right dialect. Three deployment paths: cloud API (best quality, schema-only), self-hosted (max privacy), or hybrid.</p>
+                        <div class="tag-row">
+                            <span class="tag tag-tool">Claude API</span>
+                            <span class="tag tag-tool">GPT-4</span>
+                            <span class="tag tag-tool">Llama 3</span>
+                            <span class="tag tag-privacy">Schema only sent</span>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">4</span>
+                        <h3>SQL Validation & Safety Layer</h3>
+                        <p>AI-generated SQL should never be trusted blindly. Parse with <code>sqlparse</code>, hard-block <code>DROP</code>/<code>DELETE</code>/<code>UPDATE</code>/<code>INSERT</code>, enforce <code>LIMIT</code> clauses, estimate query cost, and optionally require human approval.</p>
+                        <div class="tag-row">
+                            <span class="tag tag-tool">sqlparse</span>
+                            <span class="tag tag-concept">SELECT-only</span>
+                            <span class="tag tag-concept">LIMIT enforcement</span>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">5</span>
+                        <h3>Query Execution Engine</h3>
+                        <p>Use SQLAlchemy with connection pools for each database. Support cross-DB queries via Trino/Presto or Python-side joins. All results captured as Pandas DataFrames locally — they never leave your infrastructure.</p>
+                        <div class="tag-row">
+                            <span class="tag tag-tool">SQLAlchemy</span>
+                            <span class="tag tag-tool">Pandas</span>
+                            <span class="tag tag-tool">Trino/Presto</span>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">6</span>
+                        <h3>Results Processing & QC — Fully Local</h3>
+                        <p>Run automated quality checks on the results: null analysis, outlier detection (IQR/z-score), row count sanity, duplicate detection, and data type validation. All processing happens on your infrastructure.</p>
+                        <div class="tag-row">
+                            <span class="tag tag-tool">Pandas</span>
+                            <span class="tag tag-tool">Great Expectations</span>
+                            <span class="tag tag-privacy">100% local</span>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">7</span>
+                        <h3>Insight Generation</h3>
+                        <p>Transform raw numbers into business narratives. Send the LLM aggregate statistics — column names, row counts, averages, distributions, QC flags — but NOT individual rows. Get back: "Monthly active users grew 12% MoM, driven primarily by the APAC region."</p>
+                        <div class="tag-row">
+                            <span class="tag tag-concept">Descriptive stats</span>
+                            <span class="tag tag-concept">Trend analysis</span>
+                            <span class="tag tag-privacy">Stats only to API</span>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">8</span>
+                        <h3>Chat Interface</h3>
+                        <p>Access the system through Slack (Slack Bolt), a web dashboard (Streamlit/Gradio), or CLI. Show intermediate steps — which tables were selected, the generated SQL, execution time, QC results — for transparency and debugging.</p>
+                        <div class="tag-row">
+                            <span class="tag tag-tool">Slack Bolt</span>
+                            <span class="tag tag-tool">Streamlit</span>
+                            <span class="tag tag-tool">Gradio</span>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <span class="step-num">9</span>
+                        <h3>Feedback Loop & Continuous Learning</h3>
+                        <p>Log every question → SQL → result → feedback cycle. Thumbs-up/down on queries automatically adds few-shot examples for the LLM. Periodically retrain schema retrieval embeddings. Target: 90%+ first-try success rate.</p>
+                        <div class="tag-row">
+                            <span class="tag tag-concept">Few-shot learning</span>
+                            <span class="tag tag-concept">Accuracy tracking</span>
+                            <span class="tag tag-tool">MLflow</span>
+                        </div>
+                    </div>
+
+                    <h2>Deployment Options</h2>
+
+                    <p>Three ways to deploy the LLM component, depending on your organization's privacy requirements, budget, and infrastructure.</p>
+
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>☁️ Cloud API</th>
+                                <th>🏠 Self-Hosted</th>
+                                <th>🔀 Hybrid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Privacy</td>
+                                <td>Schema metadata leaves; data stays internal</td>
+                                <td>Nothing leaves your network</td>
+                                <td>Schema leaves for SQL gen; data stays local</td>
+                            </tr>
+                            <tr>
+                                <td>Model Quality</td>
+                                <td>Best (GPT-4, Claude)</td>
+                                <td>Good (Llama 3 70B+)</td>
+                                <td>Best of both</td>
+                            </tr>
+                            <tr>
+                                <td>Cost</td>
+                                <td>Low (~$0.01–0.10/query)</td>
+                                <td>High ($2-5K/mo GPU)</td>
+                                <td>Moderate</td>
+                            </tr>
+                            <tr>
+                                <td>Setup Effort</td>
+                                <td>Days</td>
+                                <td>Weeks</td>
+                                <td>1–2 weeks</td>
+                            </tr>
+                            <tr>
+                                <td>Best For</td>
+                                <td>Most organizations</td>
+                                <td>Strict compliance (healthcare, finance)</td>
+                                <td>Optimal balance</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Technology Stack</h2>
+
+                    <p>All components are swappable — use what fits your org's existing infrastructure:</p>
+
+                    <ul>
+                        <li><strong>Schema Registry:</strong> SQLite / JSON files / dbt docs</li>
+                        <li><strong>Vector Store (RAG):</strong> ChromaDB / FAISS / Pinecone</li>
+                        <li><strong>LLM:</strong> Claude API / GPT-4 / Llama 3</li>
+                        <li><strong>SQL Execution:</strong> SQLAlchemy + Pandas</li>
+                        <li><strong>Cross-DB Federation:</strong> Trino / Presto / Python-side joins</li>
+                        <li><strong>QC Engine:</strong> Pandas + Great Expectations</li>
+                        <li><strong>Chat Interface:</strong> Slack Bolt / Streamlit / CLI</li>
+                        <li><strong>Orchestration:</strong> LangChain / LlamaIndex / custom Python</li>
+                    </ul>
+
+                    <h2>Verification & Testing</h2>
+
+                    <p>Before going to production, validate across six dimensions:</p>
+
+                    <ol>
+                        <li><strong>Unit Tests</strong> — Feed 50+ known questions and verify generated SQL matches expected output</li>
+                        <li><strong>Integration Tests</strong> — Run the full pipeline end-to-end on a staging DB with synthetic data</li>
+                        <li><strong>QC Validation</strong> — Inject known anomalies (nulls, outliers, duplicates) and verify detection</li>
+                        <li><strong>Privacy Audit</strong> — Log every outbound API call and inspect payloads for any raw data leakage</li>
+                        <li><strong>User Acceptance</strong> — Pilot with 5–10 real PM queries; target 60–80% time reduction vs. manual SQL</li>
+                        <li><strong>Safety Stress Test</strong> — Attempt to trick the system into generating destructive SQL; verify 100% blocking</li>
+                    </ol>
+
+                    <h2>Key Design Decisions</h2>
+
+                    <p>Four architectural choices baked into this framework and why they matter:</p>
+
+                    <ul>
+                        <li><strong>Automated execution with safety layer:</strong> The SQL validation layer (Step 4) acts as the guardrail instead of requiring human approval for every query. Human approval can be toggled per-org or per-query-type.</li>
+                        <li><strong>Chat interface over scheduled reports:</strong> PM workflows are ad-hoc — questions arise from sprint reviews, stakeholder meetings, and bug reports. A chat interface matches this pattern. Scheduled reports can be layered on later.</li>
+                        <li><strong>RAG-based schema retrieval:</strong> Dumping the entire schema into the LLM doesn't scale beyond ~20 tables. RAG is necessary for multi-DB environments with hundreds of tables.</li>
+                        <li><strong>Statistical summaries to cloud API:</strong> Sending aggregate statistics (not raw rows) for insight generation satisfies the metadata-only privacy constraint while retaining high-quality LLM narratives.</li>
+                    </ul>
+
+                    <div class="callout callout-tip">
+                        <div class="callout-title">💡 Getting Started</div>
+                        <p>You don't need to build all 9 steps at once. Start with Steps 1–3 (Schema Registry + RAG + SQL Generation) for a working prototype that already saves significant time. Then layer on validation, QC, and insights iteratively.</p>
+                    </div>
+
+                    <p>This framework is applicable to any organization regardless of database stack, team size, or data sensitivity level. The privacy-safe architecture makes it deployable even in highly regulated industries — and the modular design means you can start small and scale up as the system proves its value.</p>
+                </div>
+            </article>
+
+            <section class="comments-section">
+                <h2>Comments</h2>
+                <form class="comment-form" id="commentForm">
+                    <div>
+                        <textarea id="commentText" placeholder="Share your thoughts..." required></textarea>
+                    </div>
+                    <div>
+                        <input type="text" id="commentName" placeholder="Your name" required>
+                    </div>
+                    <button type="submit" class="btn primary">Post Comment</button>
+                </form>
+                <ul class="comment-list" id="commentList"></ul>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Nikhil Kumar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('commentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const commentText = document.getElementById('commentText').value;
+            const commentName = document.getElementById('commentName').value;
+            const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            const commentHTML = `
+                <li class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">${commentName}</span>
+                        <span class="comment-date">${date}</span>
+                    </div>
+                    <div class="comment-content">${commentText}</div>
+                </li>
+            `;
+            document.getElementById('commentList').insertAdjacentHTML('afterbegin', commentHTML);
+            document.getElementById('commentText').value = '';
+            document.getElementById('commentName').value = '';
+        });
+    </script>
+</body>
+</html>

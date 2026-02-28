@@ -232,6 +232,98 @@ body {
     color: #60a5fa;
 }
 
+/* Course Hero Banner */
+.course-hero {
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.course-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 80% 50%, rgba(230, 81, 0, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.course-hero-inner {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.course-hero-icon {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #e65100, #f57c00);
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    box-shadow: 0 8px 24px rgba(230, 81, 0, 0.3);
+}
+
+.course-hero-text {
+    flex: 1;
+}
+
+.course-hero-badge {
+    display: inline-block;
+    background: rgba(230, 81, 0, 0.2);
+    border: 1px solid rgba(230, 81, 0, 0.4);
+    color: #ffab40;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.course-hero-text h2 {
+    font-size: 1.75rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.course-hero-text p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    max-width: 700px;
+}
+
+.course-hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #e65100, #f57c00);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(230, 81, 0, 0.3);
+}
+
+.course-hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 81, 0, 0.4);
+}
+
 /* Latest Posts section */
 .latest-posts {
     padding: 4rem 2rem;
@@ -353,5 +445,10 @@ body {
     .posts-grid,
     .highlight-cards {
         grid-template-columns: 1fr;
+    }
+
+    .course-hero-inner {
+        flex-direction: column;
+        text-align: center;
     }
 } 

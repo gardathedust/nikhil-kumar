@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Foundations for Product Leaders — Free Course by Nikhil Kumar</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="A free, comprehensive 6-section course on generative AI for senior product managers. Learn LLMs, RAG, agents, multi-agent systems, and more — no code required.">
+    <meta name="keywords" content="AI course, product management, generative AI, LLMs, RAG, AI agents, product leaders, free course">
+    <meta name="author" content="Nikhil Kumar">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI Foundations for Product Leaders — Free Course">
+    <meta property="og:description" content="A free, 6-section deep-dive into generative AI for senior product managers. From LLMs to multi-agent orchestration.">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Foundations for Product Leaders — Free Course">
+    <meta name="twitter:description" content="A free, 6-section deep-dive into generative AI for senior product managers. From LLMs to multi-agent orchestration.">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Course Page Styles */
+        .course-page-hero {
+            padding: 10rem 2rem 4rem;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 120%, rgba(230, 81, 0, 0.2) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .course-page-hero .hero-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .course-page-hero .badge {
+            display: inline-block;
+            background: rgba(230, 81, 0, 0.2);
+            border: 1px solid rgba(230, 81, 0, 0.5);
+            color: #ffab40;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            padding: 0.35rem 1rem;
+            border-radius: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-page-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .course-page-hero h1 span {
+            background: linear-gradient(90deg, #e65100, #ffab40);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .course-page-hero .subtitle {
+            font-size: 1.15rem;
+            color: #94a3b8;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #e65100;
+            display: block;
+        }
+
+        .hero-stat .label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        /* Who Section */
+        .who-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(to bottom, #fff3e0, #fff);
+        }
+
+        .who-section .section-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .who-section h2 {
+            font-size: 2.2rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .who-section .section-lead {
+            font-size: 1.05rem;
+            color: #6b7280;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .who-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .who-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .who-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        }
+
+        .who-card .icon {
+            width: 44px;
+            height: 44px;
+            background: #fff3e0;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #e65100;
+            font-size: 1.1rem;
+        }
+
+        .who-card h4 {
+            font-size: 1rem;
+            color: #1e293b;
+            margin-bottom: 0.3rem;
+        }
+
+        .who-card p {
+            font-size: 0.9rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        /* Why Section */
+        .why-section {
+            padding: 5rem 2rem;
+            background: #fff;
+        }
+
+        .why-section .section-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .why-section h2 {
+            font-size: 2.2rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .why-section .section-lead {
+            font-size: 1.05rem;
+            color: #6b7280;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .why-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .why-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            background: #f8fafc;
+            border-radius: 0.75rem;
+            border-left: 4px solid #e65100;
+        }
+
+        .why-item .check {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background: #e65100;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+
+        .why-item strong {
+            color: #1e293b;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .why-item p {
+            font-size: 0.95rem;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+
+        /* Curriculum Section */
+        .curriculum-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(to bottom, #fff, #f9fafb);
+        }
+
+        .curriculum-section .section-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .curriculum-section h2 {
+            font-size: 2.2rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .curriculum-section .section-lead {
+            font-size: 1.05rem;
+            color: #6b7280;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .curriculum-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .curriculum-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 1rem;
+            padding: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .curriculum-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        .curriculum-number {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #e65100, #f57c00);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.25rem;
+        }
+
+        .curriculum-body h3 {
+            font-size: 1.2rem;
+            color: #1e293b;
+            margin-bottom: 0.4rem;
+        }
+
+        .curriculum-body h3 .emoji {
+            margin-right: 0.5rem;
+        }
+
+        .curriculum-body .description {
+            font-size: 0.93rem;
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .curriculum-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .curriculum-tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.4rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        /* Case Studies */
+        .case-studies-section {
+            padding: 5rem 2rem;
+            background: #fff;
+        }
+
+        .case-studies-section .section-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .case-studies-section h2 {
+            font-size: 2.2rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .case-studies-section .section-lead {
+            font-size: 1.05rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .case-logos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .case-logo {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section .start-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #e65100, #f57c00);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(230, 81, 0, 0.3);
+        }
+
+        .cta-section .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(230, 81, 0, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .course-page-hero h1 { font-size: 2rem; }
+            .course-page-hero { padding: 8rem 1.5rem 3rem; }
+            .hero-stats { flex-direction: column; gap: 1.5rem; }
+            .who-grid { grid-template-columns: 1fr; }
+            .curriculum-card { flex-direction: column; }
+            .curriculum-number { width: 40px; height: 40px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">NK</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="course-page-hero">
+        <div class="hero-inner">
+            <span class="badge">FREE COURSE — 6 SECTIONS — 5,400+ LINES</span>
+            <h1>AI Foundations for<br><span>Product Leaders</span></h1>
+            <p class="subtitle">
+                A comprehensive deep-dive into generative AI — built specifically for senior product managers at top B2C companies. No fluff, no code. Just the technical fluency you need to lead AI-powered products with confidence.
+            </p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="number">6</span>
+                    <span class="label">Sections</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="number">50+</span>
+                    <span class="label">Real-World Cases</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="number">30+</span>
+                    <span class="label">Frameworks</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="number">0</span>
+                    <span class="label">Lines of Code Required</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who Is This For -->
+    <section class="who-section">
+        <div class="section-inner">
+            <h2>Who Is This For?</h2>
+            <p class="section-lead">
+                You're a senior PM at a top-tier B2C company. You've shipped products used by millions. You know discovery, specs, and backlogs — but generative AI has changed the rules. This course bridges the gap.
+            </p>
+            <div class="who-grid">
+                <div class="who-card">
+                    <div class="icon"><i class="fas fa-chess-queen"></i></div>
+                    <div>
+                        <h4>Senior & Director PMs</h4>
+                        <p>Leading product teams at companies like Google, Amazon, Meta, Uber, Netflix, or similar. You need to make architecture decisions with your engineers.</p>
+                    </div>
+                </div>
+                <div class="who-card">
+                    <div class="icon"><i class="fas fa-rocket"></i></div>
+                    <div>
+                        <h4>PMs Building AI Features</h4>
+                        <p>You're tasked with adding AI to your product — chatbots, recommendations, generative features — and need to understand what's actually possible.</p>
+                    </div>
+                </div>
+                <div class="who-card">
+                    <div class="icon"><i class="fas fa-crosshairs"></i></div>
+                    <div>
+                        <h4>PMs Setting AI Strategy</h4>
+                        <p>You present to leadership and need to set realistic expectations about what AI can and can't do today — and where the technology is heading.</p>
+                    </div>
+                </div>
+                <div class="who-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <div>
+                        <h4>PMs Partnering with ML Teams</h4>
+                        <p>You work alongside ML engineers and data scientists and need the vocabulary and mental models to collaborate effectively.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why This Course -->
+    <section class="why-section">
+        <div class="section-inner">
+            <h2>Why This Course?</h2>
+            <p class="section-lead">
+                Most AI content is either too high-level ("AI will change everything!") or too technical (research papers and code tutorials). This course sits in the critical middle — deep enough to be useful, accessible enough to finish.
+            </p>
+            <div class="why-list">
+                <div class="why-item">
+                    <div class="check"><i class="fas fa-check"></i></div>
+                    <div>
+                        <strong>Make confident architecture decisions</strong>
+                        <p>RAG vs. fine-tuning? Single agent vs. multi-agent? Cloud API vs. self-hosted? You'll have the frameworks to decide.</p>
+                    </div>
+                </div>
+                <div class="why-item">
+                    <div class="check"><i class="fas fa-check"></i></div>
+                    <div>
+                        <strong>Design AI-native experiences</strong>
+                        <p>Go beyond "add a chatbot." Learn anticipatory UX, progressive autonomy, learning loops, and the patterns that define great AI products.</p>
+                    </div>
+                </div>
+                <div class="why-item">
+                    <div class="check"><i class="fas fa-check"></i></div>
+                    <div>
+                        <strong>Set realistic expectations with leadership</strong>
+                        <p>Understand hallucination, context windows, reasoning limits, and cost — so you can promise what AI can actually deliver.</p>
+                    </div>
+                </div>
+                <div class="why-item">
+                    <div class="check"><i class="fas fa-check"></i></div>
+                    <div>
+                        <strong>Build competitive moats</strong>
+                        <p>Learn evaluation frameworks, feedback loops, and continuous improvement strategies that compound over time — not just prompt engineering.</p>
+                    </div>
+                </div>
+                <div class="why-item">
+                    <div class="check"><i class="fas fa-check"></i></div>
+                    <div>
+                        <strong>Lead responsibly</strong>
+                        <p>Understand safety, alignment, bias, guardrails, and human-in-the-loop oversight — critical for any PM shipping AI at scale.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum -->
+    <section class="curriculum-section">
+        <div class="section-inner">
+            <h2>Course Curriculum</h2>
+            <p class="section-lead">
+                Six sections, each building on the previous. By the end, you'll have a complete mental model — from how a single token is predicted, all the way up to how a fleet of specialized agents coordinates complex workflows.
+            </p>
+            <div class="curriculum-list">
+                <!-- Section 1 -->
+                <div class="curriculum-card">
+                    <div class="curriculum-number">1</div>
+                    <div class="curriculum-body">
+                        <h3><span class="emoji">🤯</span>How Generative AI Changes the Game</h3>
+                        <p class="description">The strategic foundation. Why generative AI is structurally different from the Internet, cloud, and mobile revolutions. How AI impacts the four types of product work. How your core PM responsibilities are being rewritten — and how customer expectations are permanently shifting.</p>
+                        <div class="curriculum-tags">
+                            <span class="curriculum-tag">Strategic Context</span>
+                            <span class="curriculum-tag">PM Role Evolution</span>
+                            <span class="curriculum-tag">Duolingo</span>
+                            <span class="curriculum-tag">Canva</span>
+                            <span class="curriculum-tag">Shopify</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section 2 -->
+                <div class="curriculum-card">
+                    <div class="curriculum-number">2</div>
+                    <div class="curriculum-body">
+                        <h3><span class="emoji">🧠</span>LLMs, Foundation Models & Base Capabilities</h3>
+                        <p class="description">The technical foundation — explained for PMs, not PhDs. How next-token prediction works, tokenization, the Transformer architecture, and the 7 critical limitations every PM must internalize: hallucination, knowledge cutoffs, context windows, reasoning failures, and more.</p>
+                        <div class="curriculum-tags">
+                            <span class="curriculum-tag">Transformers</span>
+                            <span class="curriculum-tag">Tokenization</span>
+                            <span class="curriculum-tag">GPT-4</span>
+                            <span class="curriculum-tag">Claude</span>
+                            <span class="curriculum-tag">Llama</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section 3 -->
+                <div class="curriculum-card">
+                    <div class="curriculum-number">3</div>
+                    <div class="curriculum-body">
+                        <h3><span class="emoji">🛠️</span>Knowledge, Reasoning, Tools & Memory</h3>
+                        <p class="description">The four upgrade layers that transform a base LLM into a production-grade product. Deep dives into RAG (Naive → Enhanced → Modular), reasoning techniques (Chain of Thought → Tree of Thoughts), memory architectures, and tool integration patterns.</p>
+                        <div class="curriculum-tags">
+                            <span class="curriculum-tag">RAG</span>
+                            <span class="curriculum-tag">Chain of Thought</span>
+                            <span class="curriculum-tag">Vector Databases</span>
+                            <span class="curriculum-tag">Perplexity AI</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section 4 -->
+                <div class="curriculum-card">
+                    <div class="curriculum-number">4</div>
+                    <div class="curriculum-body">
+                        <h3><span class="emoji">📈</span>Learning, Feedback, Fine-Tuning & Evaluation</h3>
+                        <p class="description">The AI improvement stack. How to evaluate AI quality rigorously, design feedback loops, decide when fine-tuning is worth it, and understand how RLHF and its successors create the alignment flywheel that separates great AI products from demos.</p>
+                        <div class="curriculum-tags">
+                            <span class="curriculum-tag">RLHF</span>
+                            <span class="curriculum-tag">DPO</span>
+                            <span class="curriculum-tag">Evaluation</span>
+                            <span class="curriculum-tag">Fine-Tuning</span>
+                            <span class="curriculum-tag">LoRA</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section 5 -->
+                <div class="curriculum-card">
+                    <div class="curriculum-number">5</div>
+                    <div class="curriculum-body">
+                        <h3><span class="emoji">🎯</span>Agents, Goals & Decision Making</h3>
+                        <p class="description">AI agents — the frontier of product development. The Chatbot → Copilot → Agent spectrum. The agent architecture loop: perception, planning, execution, and reflection. Goal definition, progressive autonomy, trust frameworks, and the safety guardrails needed for production.</p>
+                        <div class="curriculum-tags">
+                            <span class="curriculum-tag">ReAct</span>
+                            <span class="curriculum-tag">Autonomy Levels</span>
+                            <span class="curriculum-tag">Devin</span>
+                            <span class="curriculum-tag">Copilot</span>
+                            <span class="curriculum-tag">Klarna AI</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section 6 -->
+                <div class="curriculum-card">
+                    <div class="curriculum-number">6</div>
+                    <div class="curriculum-body">
+                        <h3><span class="emoji">🤝</span>Multi-Agent Coordination & Orchestration</h3>
+                        <p class="description">The most advanced section. How to decompose complex tasks into multi-agent workflows. Communication protocols, orchestration patterns (sequential, parallel, hierarchical), resource management, conflict resolution, and monitoring at scale.</p>
+                        <div class="curriculum-tags">
+                            <span class="curriculum-tag">LangGraph</span>
+                            <span class="curriculum-tag">CrewAI</span>
+                            <span class="curriculum-tag">AutoGen</span>
+                            <span class="curriculum-tag">Orchestration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="case-studies-section">
+        <div class="section-inner">
+            <h2>Real-World Case Studies Throughout</h2>
+            <p class="section-lead">
+                Every concept is grounded in how real companies are building AI products today. No hypotheticals — just battle-tested examples from the best in the industry.
+            </p>
+            <div class="case-logos">
+                <span class="case-logo">Duolingo Max</span>
+                <span class="case-logo">Canva Magic Studio</span>
+                <span class="case-logo">Shopify Sidekick</span>
+                <span class="case-logo">Netflix AI</span>
+                <span class="case-logo">Amazon Rufus</span>
+                <span class="case-logo">Notion AI</span>
+                <span class="case-logo">Spotify DJ</span>
+                <span class="case-logo">Perplexity AI</span>
+                <span class="case-logo">GitHub Copilot</span>
+                <span class="case-logo">Google Gemini</span>
+                <span class="case-logo">ChatGPT</span>
+                <span class="case-logo">Anthropic Claude</span>
+                <span class="case-logo">Microsoft Copilot</span>
+                <span class="case-logo">Cursor IDE</span>
+                <span class="case-logo">Klarna AI</span>
+                <span class="case-logo">Intercom Fin</span>
+                <span class="case-logo">Bloomberg GPT</span>
+                <span class="case-logo">Instacart</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Ready to Get Started?</h2>
+        <p>Each section builds on the previous. Start with Section 1 and work your way through — or jump to the topic that matters most to you right now.</p>
+        <a href="blog.html" class="start-btn">
+            Read More on the Blog <i class="fas fa-arrow-right"></i>
+        </a>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Nikhil Kumar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
