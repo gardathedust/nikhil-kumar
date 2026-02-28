@@ -303,89 +303,6 @@
             padding: 0 0.25rem;
         }
 
-        /* Comments section */
-        .comments-section {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .comment-form {
-            margin-bottom: 2rem;
-        }
-
-        .comment-form textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            min-height: 100px;
-            font-family: inherit;
-        }
-
-        .comment-form input[type="text"] {
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            width: 100%;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-        }
-
-        .comment-form button {
-            background-color: #e65100;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-        }
-
-        .comment-form button:hover {
-            background-color: #f57c00;
-        }
-
-        .comment-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .comment {
-            padding: 1rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            background-color: #fff;
-        }
-
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.875rem;
-            color: #6b7280;
-        }
-
-        .comment-author {
-            font-weight: 600;
-            color: #1e293b;
-        }
-
-        .comment-content {
-            color: #4b5563;
-        }
-
-        .btn.primary {
-            background-color: #e65100;
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn.primary:hover {
-            background-color: #f57c00;
-        }
 
         @media (max-width: 768px) {
             .blog-title { font-size: 1.75rem; }
@@ -680,48 +597,16 @@
                 </div>
             </article>
 
-            <section class="comments-section">
-                <h2>Comments</h2>
-                <form class="comment-form" id="commentForm">
-                    <div>
-                        <textarea id="commentText" placeholder="Share your thoughts..." required></textarea>
-                    </div>
-                    <div>
-                        <input type="text" id="commentName" placeholder="Your name" required>
-                    </div>
-                    <button type="submit" class="btn primary">Post Comment</button>
-                </form>
-                <ul class="comment-list" id="commentList"></ul>
-            </section>
+
         </div>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Nikhil Kumar. All rights reserved.</p>
+            <p>&copy; 2026 Nikhil Kumar. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="../js/main.js"></script>
-    <script>
-        document.getElementById('commentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const commentText = document.getElementById('commentText').value;
-            const commentName = document.getElementById('commentName').value;
-            const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-            const commentHTML = `
-                <li class="comment">
-                    <div class="comment-header">
-                        <span class="comment-author">${commentName}</span>
-                        <span class="comment-date">${date}</span>
-                    </div>
-                    <div class="comment-content">${commentText}</div>
-                </li>
-            `;
-            document.getElementById('commentList').insertAdjacentHTML('afterbegin', commentHTML);
-            document.getElementById('commentText').value = '';
-            document.getElementById('commentName').value = '';
-        });
-    </script>
 </body>
 </html>

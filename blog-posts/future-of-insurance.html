@@ -229,50 +229,18 @@
                     </ul>
                 </div>
             </article>
-
-            <section class="comments-section">
-                <h2>Comments</h2>
-                <form class="comment-form" id="commentForm">
-                    <div>
-                        <textarea id="commentText" placeholder="Share your thoughts..." required></textarea>
-                    </div>
-                    <div>
-                        <input type="text" id="commentName" placeholder="Your name" required style="padding: 0.5rem; margin-bottom: 1rem; width: 100%; border: 1px solid #e5e7eb; border-radius: 0.5rem;">
-                    </div>
-                    <button type="submit" class="btn primary">Post Comment</button>
-                </form>
-
-                <ul class="comment-list" id="commentList">
-                    <!-- Sample comment -->
-                    <li class="comment">
-                        <div class="comment-header">
-                            <span class="comment-author">Raj Patel</span>
-                            <span class="comment-date">February 16, 2024</span>
-                        </div>
-                        <div class="comment-content">
-                            The integration of AI and data analytics in travel insurance is fascinating. It's great to see how technology is making insurance more accessible and user-friendly.
-                        </div>
-                    </li>
-                </ul>
-            </section>
         </div>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Nikhil Kumar. All rights reserved.</p>
+            <p>&copy; 2026 Nikhil Kumar. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="../js/main.js"></script>
-    <script>
-        // Comment system functionality
-        document.getElementById('commentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const commentText = document.getElementById('commentText').value;
-            const commentName = document.getElementById('commentName').value;
-            const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+</body>
+</html>
             
             const commentHTML = `
                 <li class="comment">
