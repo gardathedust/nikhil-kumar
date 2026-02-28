@@ -239,7 +239,129 @@ body {
     margin: 0;
 }
 
-/* Course Hero Banner */
+/* Vibe Coding Projects */
+.vibe-projects {
+    padding: 3rem 2rem;
+    background: #fff;
+}
+
+.vibe-projects-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #1e293b;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.vibe-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.vibe-card {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #fff7ed, #fff3e0);
+    border: 1px solid #fed7aa;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.vibe-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.vibe-card-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #e65100, #f57c00);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: white;
+    box-shadow: 0 4px 12px rgba(230, 81, 0, 0.25);
+    margin-bottom: 0.75rem;
+}
+
+.vibe-card-badge {
+    display: inline-block;
+    background: #e65100;
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    width: fit-content;
+}
+
+.vibe-card h3 {
+    font-size: 1.2rem;
+    color: #1e293b;
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+}
+
+.vibe-card p {
+    color: #4b5563;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+}
+
+.vibe-card-stats {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.vibe-card-stats span {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-weight: 600;
+}
+
+.vibe-card-stats strong {
+    color: #e65100;
+    font-weight: 800;
+}
+
+.vibe-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #e65100;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    width: fit-content;
+    margin-top: auto;
+    transition: all 0.2s ease;
+}
+
+.vibe-card:hover .vibe-card-cta {
+    filter: brightness(0.9);
+}
+
+/* Course Hero Banner (kept for course page) */
 .course-hero {
     padding: 0 2rem;
     background: #fff;
@@ -590,5 +712,9 @@ body {
 
     .course-hero-stats {
         justify-content: center;
+    }
+
+    .vibe-projects-grid {
+        grid-template-columns: 1fr;
     }
 } 
