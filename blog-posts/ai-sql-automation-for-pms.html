@@ -316,6 +316,11 @@
     <header class="header">
         <nav class="nav-container">
             <a href="../index.html" class="logo" style="text-decoration:none;color:inherit;">NK</a>
+            <button class="hamburger" aria-label="Toggle menu" onclick="this.classList.toggle('active');this.parentElement.querySelector('.nav-links').classList.toggle('active');">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="../profile.html">Profile</a></li>
                 <li><a href="../blog.html">Blog</a></li>
