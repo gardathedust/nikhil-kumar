@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section 2: LLMs, Foundation Models & Base Capabilities — AI Foundations for Product Leaders</title>
+    <meta name="description" content="Learn how large language models actually work, their critical limitations, and how to think about foundation models as upgradeable building blocks.">
+    <meta name="author" content="Nikhil Kumar">
+    <meta property="og:title" content="Section 2: LLMs, Foundation Models & Base Capabilities — AI for PMs">
+    <meta property="og:description" content="Learn how large language models actually work, their critical limitations, and how to think about foundation models as upgradeable building blocks.">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Section 2: LLMs, Foundation Models & Base Capabilities — AI for PMs">
+    <meta name="twitter:description" content="Learn how large language models actually work, their critical limitations, and how to think about foundation models as upgradeable building blocks.">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .section-page {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(to bottom, #fff3e0, #fff);
+        }
+
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Section Hero */
+        .section-hero {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-hero .breadcrumb {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .section-hero .breadcrumb a {
+            color: #e65100;
+            text-decoration: none;
+        }
+
+        .section-hero .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .section-hero h1 {
+            font-size: 2.2rem;
+            color: #1e293b;
+            border-bottom: 2px solid #e65100;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .section-hero .learning-goal {
+            background: #fff3e0;
+            border-left: 4px solid #e65100;
+            padding: 1rem 1.25rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-size: 1rem;
+            color: #4b5563;
+            line-height: 1.7;
+        }
+
+        .section-hero .learning-goal strong {
+            color: #e65100;
+        }
+
+        /* Article body */
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4b5563;
+        }
+
+        .article-body h2 {
+            color: #1e293b;
+            margin: 2.5rem 0 1rem;
+            border-left: 3px solid #e65100;
+            padding-left: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .article-body h3 {
+            color: #1e293b;
+            margin: 2rem 0 0.75rem;
+            font-size: 1.25rem;
+        }
+
+        .article-body h4 {
+            color: #374151;
+            margin: 1.5rem 0 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .article-body p {
+            margin-bottom: 1.25rem;
+        }
+
+        .article-body ul, .article-body ol {
+            margin-bottom: 1.25rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-body li {
+            margin-bottom: 0.4rem;
+        }
+
+        .article-body strong {
+            color: #1e293b;
+        }
+
+        .article-body em {
+            color: #374151;
+        }
+
+        .article-body blockquote {
+            background: #fff3e0;
+            border-left: 4px solid #e65100;
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-style: italic;
+            color: #4b5563;
+        }
+
+        .article-body blockquote p {
+            margin-bottom: 0.5rem;
+        }
+
+        .article-body blockquote p:last-child {
+            margin-bottom: 0;
+        }
+
+        .article-body code {
+            background: #f3f4f6;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+            color: #e65100;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+        }
+
+        .article-body pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .article-body pre code {
+            background: none;
+            color: #e2e8f0;
+            padding: 0;
+            font-size: inherit;
+        }
+
+        .article-body hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d1d5db, transparent);
+            margin: 2.5rem 0;
+        }
+
+        .article-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.93rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+        .article-body thead th {
+            background: #e65100;
+            color: white;
+            padding: 0.7rem 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .article-body tbody td {
+            padding: 0.65rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            color: #4b5563;
+            vertical-align: top;
+        }
+
+        .article-body tbody tr:nth-child(even) {
+            background: #f9fafb;
+        }
+
+        .article-body tbody td:first-child {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .article-body img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        /* Section navigation */
+        .section-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+            gap: 1rem;
+        }
+
+        .section-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #e65100;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid #e65100;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .section-nav a:hover {
+            background: #e65100;
+            color: white;
+        }
+
+        .section-nav .placeholder {
+            visibility: hidden;
+            padding: 0.6rem 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .section-hero h1 { font-size: 1.6rem; }
+            .section-page { padding: 7rem 1.5rem 3rem; }
+            .article-body { font-size: 1rem; }
+            .article-body table { font-size: 0.82rem; }
+            .article-body thead th,
+            .article-body tbody td { padding: 0.5rem 0.6rem; }
+            .section-nav { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">NK</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../profile.html">Profile</a></li>
+                <li><a href="../blog.html">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="section-page">
+        <div class="section-content">
+            <div class="section-hero">
+                <div class="breadcrumb">
+                    <a href="../index.html">Home</a> &rarr; <a href="../ai-pm-course.html">AI PM Course</a> &rarr; Section 2
+                </div>
+                <h1>🧠 Section 2: LLMs, Foundation Models & Base Capabilities</h1>
+            </div>
+
+            <div class="article-body">
+<hr />
+<h2>2.1 How Gen AI Models Actually Work (Without the PhD)</h2>
+<p>Before you can make good product decisions with AI, you need a working mental model of what's happening inside. You don't need to write code. You <strong>do</strong> need to know what the machine is doing well enough to predict when it will fail your users.</p>
+<h3>2.1.1 The Core Idea: Next-Token Prediction</h3>
+<p>Every major LLM — GPT-4, Claude, Gemini, Llama — does fundamentally the same thing:</p>
+<p><strong>It predicts the most likely next piece of text, one token at a time.</strong></p>
+<p>That's it. When ChatGPT writes a paragraph, it isn't "thinking" about the paragraph. It generates token #1, then uses that to generate token #2, then token #3, and so on — hundreds or thousands of times.</p>
+<h4>Analogy: The World's Best Autocomplete</h4>
+<p>Imagine the autocomplete on your phone keyboard, but trained on essentially the entire public internet — books, Wikipedia, code repositories, Reddit threads, scientific papers, news articles. Instead of suggesting the next word, it suggests the next <em>token</em> (a token is roughly ¾ of a word). It does this so well that the output reads like it was written by a thoughtful human.</p>
+<p><strong>Why this matters for PMs:</strong> The model isn't "understanding" your user's question in the way a human support agent does. It's pattern-matching against hundreds of billions of parameters to produce statistically likely continuations. This distinction explains almost every failure mode you'll encounter in production.</p>
+<hr />
+<h3>2.1.2 Tokenization: How Models See Text</h3>
+<p>Models don't read words. They read <strong>tokens</strong> — chunks of text that might be a whole word, part of a word, or even a single character.</p>
+<table>
+<thead>
+<tr>
+<th>Text</th>
+<th>Tokens (approximate)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Hello world"</td>
+<td><code>["Hello", " world"]</code> — 2 tokens</td>
+</tr>
+<tr>
+<td>"unbelievable"</td>
+<td><code>["un", "believ", "able"]</code> — 3 tokens</td>
+</tr>
+<tr>
+<td>"GPT-4"</td>
+<td><code>["G", "PT", "-", "4"]</code> — 4 tokens</td>
+</tr>
+<tr>
+<td>"こんにちは"</td>
+<td>Could be 3-5 tokens depending on the model</td>
+</tr>
+</tbody>
+</table>
+<h4>Why Tokenization Matters to PMs</h4>
+<ul>
+<li><strong>Cost:</strong> You pay per token (input + output). GPT-4o charges ~$2.50/million input tokens, ~$10/million output tokens. A customer service response might be 200-500 tokens. Multiply by millions of users and this is a real line item.</li>
+<li><strong>Context window limits:</strong> Models have a maximum number of tokens they can process at once. GPT-4 Turbo handles 128K tokens (~300 pages). Claude 3.5 handles 200K tokens. Gemini 1.5 Pro handles up to 1M tokens. If your product needs to process a 500-page legal document in one shot, model choice matters.</li>
+<li><strong>Non-English tax:</strong> Many languages tokenize less efficiently. The same sentence in Japanese or Hindi might use 2-3x more tokens than in English, making your product more expensive for those users. This has direct implications for international product launches.</li>
+<li><strong>Math and code:</strong> Numbers tokenize unpredictably. "123456" might become <code>["123", "456"]</code>, which is one reason models are unreliable at arithmetic — they literally don't see the number as a single entity.</li>
+</ul>
+<hr />
+<h3>2.1.3 Transformers &amp; Attention: The Architecture That Changed Everything</h3>
+<p>Every frontier LLM is built on the <strong>Transformer</strong> architecture, introduced in Google's 2017 paper "Attention Is All You Need."</p>
+<h4>Analogy: The Brilliant Reader</h4>
+<p>Imagine you're reading a 50-page document to answer a question. A normal reader goes top to bottom, remembering less as they go. A Transformer is like a reader who can instantly highlight the 15 most relevant sentences across all 50 pages — even if they're far apart — and synthesize an answer from just those highlights.</p>
+<p>This "highlighting" is the <strong>attention mechanism</strong>.</p>
+<h4>How Attention Works (PM-Friendly Version)</h4>
+<p>When the model processes your prompt, every token "looks at" every other token and assigns an <strong>attention score</strong> — how relevant is this other token to understanding me in context?</p>
+<p>Example prompt: <em>"The bank by the river was steep."</em></p>
+<ul>
+<li>The word "bank" is ambiguous (financial institution vs. riverbank).</li>
+<li>The attention mechanism lets "bank" look at "river" and "steep," giving those words high attention scores, so the model correctly interprets "bank" as a riverbank.</li>
+</ul>
+<p><strong>Multi-head attention</strong> means the model runs many of these attention calculations in parallel, each one learning to focus on different types of relationships — syntax, semantics, long-range references, etc.</p>
+<h4>Why Transformers Won</h4>
+<p>Before Transformers, models (like RNNs/LSTMs) processed text sequentially — word by word, left to right. This was:
+- Slow (couldn't parallelize)
+- Forgetful (information degraded over long sequences)</p>
+<p>Transformers process all tokens in parallel and can attend to any position equally. This is why:
+- Training became massively parallelizable across thousands of GPUs
+- Models got dramatically better at long-range coherence
+- Scale became the dominant strategy (more data + more parameters = better results)</p>
+<hr />
+<h3>2.1.4 The Training Process: Three Phases</h3>
+<p>Understanding how a model is trained tells you <em>why</em> it behaves certain ways in your product.</p>
+<h4>Phase 1: Pre-training (The Knowledge Phase)</h4>
+<p><strong>What happens:</strong> The model reads trillions of tokens from the internet, books, code, and other text. It learns to predict the next token. This is unsupervised — no human labels needed.</p>
+<p><strong>Analogy:</strong> Imagine a medical student who reads every textbook, journal article, and patient record ever published. They absorb an enormous amount of knowledge — but they've never actually talked to a patient.</p>
+<p><strong>What it produces:</strong> A <strong>base model</strong> (also called a "pre-trained model"). Base models are powerful but awkward — they'll complete any text plausibly, but they don't know how to have a conversation. If you type a question, a base model might generate 10 related questions rather than an answer, because that's a plausible continuation of "question" text.</p>
+<p><strong>Cost and scale:</strong>
+- GPT-4's training cost is estimated at $100M+ in compute
+- Llama 3 405B was trained on 15T+ tokens
+- Gemini Ultra was trained on Google's entire TPU fleet</p>
+<h4>Phase 2: Fine-tuning / Instruction Tuning (The Behavior Phase)</h4>
+<p><strong>What happens:</strong> Humans create thousands of example conversations: "When a user asks X, a good response looks like Y." The model is fine-tuned on these examples.</p>
+<p><strong>Analogy:</strong> That medical student now does their residency — they learn how to interact with patients, follow protocols, and give useful responses rather than just reciting textbook passages.</p>
+<p><strong>What it produces:</strong> An <strong>instruction-tuned model</strong> that can follow directions, answer questions, and hold conversations. ChatGPT, Claude, and Gemini are all instruction-tuned models.</p>
+<h4>Phase 3: RLHF / RLAIF (The Alignment Phase)</h4>
+<p><strong>What happens:</strong> Human raters compare pairs of model outputs and choose which is better. This feedback is used to further train the model via Reinforcement Learning from Human Feedback (RLHF). Anthropic and Google also use AI-generated feedback (RLAIF — Reinforcement Learning from AI Feedback).</p>
+<p><strong>Analogy:</strong> The doctor now gets patient satisfaction surveys, peer reviews, and malpractice guidelines — they learn not just to be knowledgeable and responsive, but to be careful, ethical, and aligned with what patients actually need.</p>
+<p><strong>What it produces:</strong> A model that is more helpful, less harmful, and more aligned with user expectations. This is why Claude tends toward caution, ChatGPT toward helpfulness, and Gemini toward Google-ecosystem integration.</p>
+<p><strong>PM Insight:</strong> The alignment phase is where the model's "personality" and safety guardrails get baked in. When you find a model is too cautious (won't answer medical questions) or too permissive (generates harmful content), that's an RLHF tuning decision — not a knowledge gap.</p>
+<hr />
+<h3>2.1.5 Inference: What Happens When a User Hits "Send"</h3>
+<p>When a user submits a prompt in your product:</p>
+<ol>
+<li><strong>Tokenization:</strong> The prompt is broken into tokens</li>
+<li><strong>Encoding:</strong> Each token is converted into a high-dimensional vector (embedding)</li>
+<li><strong>Forward pass:</strong> Tokens flow through the Transformer layers (GPT-4 reportedly has ~120 layers), with attention computed at each layer</li>
+<li><strong>Output distribution:</strong> The model produces a probability distribution over all possible next tokens (~100K vocabulary)</li>
+<li><strong>Sampling:</strong> A token is selected based on the probability distribution (controlled by <strong>temperature</strong> — more on this below)</li>
+<li><strong>Repeat:</strong> Steps 3-5 repeat until the model produces a stop token or hits the max length</li>
+</ol>
+<p><strong>Temperature</strong> controls randomness:
+- <strong>Temperature 0:</strong> Always picks the most likely token → deterministic, repetitive, "safe"
+- <strong>Temperature 0.7:</strong> Balanced — good for most product use cases
+- <strong>Temperature 1.0+:</strong> More creative/random — useful for brainstorming, dangerous for factual tasks</p>
+<p><strong>PM Decision Point:</strong> Temperature is one of your most important product levers. A customer support bot should use low temperature (0.1-0.3). A creative writing assistant should use higher temperature (0.7-1.0). Getting this wrong creates either a robotic experience or an unreliable one.</p>
+<hr />
+<h3>2.1.6 What PMs Need to Know vs. What Engineers Handle</h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>PM Must Understand</th>
+<th>Engineer Handles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tokenization</strong></td>
+<td>Cost implications, context window limits, multilingual impact</td>
+<td>Token vocabulary design, BPE algorithm implementation</td>
+</tr>
+<tr>
+<td><strong>Attention</strong></td>
+<td>Why models handle some tasks well (long-range reasoning) and others poorly (precise counting)</td>
+<td>Attention head configuration, KV-cache optimization</td>
+</tr>
+<tr>
+<td><strong>Training phases</strong></td>
+<td>How each phase shapes model behavior and limitations</td>
+<td>Hyperparameter tuning, distributed training infrastructure</td>
+</tr>
+<tr>
+<td><strong>Temperature</strong></td>
+<td>Product impact on user experience; when to use high vs. low</td>
+<td>Sampling algorithms (top-k, top-p, beam search)</td>
+</tr>
+<tr>
+<td><strong>Context window</strong></td>
+<td>Maximum input size, what to include/exclude in prompts</td>
+<td>Context compression, retrieval augmentation, chunking strategies</td>
+</tr>
+<tr>
+<td><strong>Fine-tuning</strong></td>
+<td>When your use case needs it, what data you need, cost/timeline</td>
+<td>Training loops, LoRA adapters, evaluation metrics</td>
+</tr>
+<tr>
+<td><strong>Inference cost</strong></td>
+<td>Unit economics per API call, latency budgets, caching strategy</td>
+<td>GPU provisioning, batching, model quantization</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2.2 Critical Limitations of Foundation Models</h2>
+<p>This is the most important subsection for PMs. Every AI product failure you've read about traces back to one of these limitations. Memorize them.</p>
+<h3>Limitation 1: Hallucination (Confident Fabrication)</h3>
+<p><strong>What it is:</strong> Models generate plausible-sounding but factually incorrect information with full confidence. They don't "know" they're wrong.</p>
+<p><strong>Why it happens:</strong> The model is optimizing for statistically likely text, not truth. If a plausible-sounding answer exists in the latent space, the model will produce it — whether or not it's factually accurate.</p>
+<p><strong>Real-world examples:</strong>
+- <strong>Google Bard launch (2023):</strong> In its very first public demo, Bard claimed the James Webb Space Telescope took the first pictures of exoplanets outside our solar system. This was wrong. Google's stock dropped ~$100B in market cap that day.
+- <strong>ChatGPT legal citations:</strong> Lawyer Steven Schwartz used ChatGPT to write a legal brief that cited six entirely fabricated court cases. The judge sanctioned him for submitting fake citations.
+- <strong>Microsoft Bing Chat (early 2023):</strong> Confidently provided incorrect financial data from earnings reports, hallucinating specific revenue numbers that didn't exist.
+- <strong>Amazon product reviews:</strong> AI-generated product descriptions have included fabricated specifications and non-existent features.</p>
+<p><strong>Hallucination rate benchmarks (approximate):</strong>
+| Model | Hallucination Rate (general QA) |
+|---|---|
+| GPT-4o | ~3-5% |
+| Claude 3.5 Sonnet | ~3-4% |
+| Gemini 1.5 Pro | ~4-6% |
+| Llama 3 70B | ~6-10% |
+| GPT-3.5 | ~15-20% |</p>
+<p><strong>PM Mitigation Strategies:</strong>
+- Implement RAG (Retrieval-Augmented Generation) to ground responses in verified data
+- Add source citations and confidence indicators to the UI
+- Use model-as-judge verification (have a second model check the first)
+- Design human-in-the-loop workflows for high-stakes outputs
+- Never ship AI in domains where a single hallucination has severe consequences (medical diagnosis, legal advice, financial trading) without robust guardrails</p>
+<hr />
+<h3>Limitation 2: Knowledge Cutoff (Frozen in Time)</h3>
+<p><strong>What it is:</strong> Models only know what was in their training data. They have no awareness of events after their training cutoff date.</p>
+<p><strong>Specific cutoff dates (as of early 2025):</strong>
+| Model | Approximate Knowledge Cutoff |
+|---|---|
+| GPT-4o | October 2023 |
+| Claude 3.5 Sonnet | Early 2024 |
+| Gemini 1.5 Pro | ~Late 2023 (with Search grounding) |
+| Llama 3.1 | December 2023 |</p>
+<p><strong>Real-world impact:</strong>
+- <strong>Customer service bots</strong> that can't answer questions about product updates or policy changes made after training
+- <strong>Travel planning tools</strong> that suggest restaurants that have closed, reference pre-pandemic travel rules, or miss new visa requirements
+- <strong>Financial analysis tools</strong> that don't know about recent earnings, regulatory changes, or market events
+- <strong>HR chatbots</strong> that reference outdated company policies</p>
+<p><strong>PM Mitigation Strategies:</strong>
+- Implement RAG with a frequently updated knowledge base
+- Use web search/grounding (Gemini's Google Search grounding, ChatGPT's Browse feature)
+- Clearly display knowledge cutoff dates to users
+- Build pipelines to inject current context into prompts
+- Design products that fail gracefully when asked about recent events ("I don't have information about events after [date]. Let me search for the latest...")</p>
+<hr />
+<h3>Limitation 3: Reasoning Gaps (Brittle Logic)</h3>
+<p><strong>What it is:</strong> Models can appear to reason through complex problems but fail in predictable, sometimes bizarre ways — especially on novel problems that require true logical deduction rather than pattern matching.</p>
+<p><strong>Where models struggle:</strong>
+- <strong>Multi-step math:</strong> Ask GPT-4 to multiply 3,847 × 9,261 and it will often get it wrong. It's not calculating — it's guessing based on patterns.
+- <strong>Spatial reasoning:</strong> "I'm facing north. I turn left. I turn left again. What direction am I facing?" Models frequently get this wrong.
+- <strong>Counterfactual reasoning:</strong> "If the Roman Empire never fell, what language would modern France speak?" Models tend to give superficially plausible but logically inconsistent answers.
+- <strong>Planning and constraint satisfaction:</strong> "Schedule 5 meetings in 3 rooms over 2 days with these 12 constraints" — models struggle with combinatorial constraint problems.
+- <strong>Negation and logic puzzles:</strong> "Which of these statements is NOT true?" — models are measurably worse with negation.</p>
+<p><strong>Real-world product implication:</strong> If you're building a product that requires precise calculation, deterministic logic, or constraint satisfaction — <strong>don't rely on the LLM for that part.</strong> Use the LLM for natural language understanding and generation; use traditional code for computation.</p>
+<p><strong>The o1/o3 evolution:</strong> OpenAI's o1 and o3 "reasoning" models use chain-of-thought at inference time to dramatically improve on reasoning tasks. But they're slower and more expensive. Anthropic's Claude 3.5 also invested heavily in reasoning. This is an active area of improvement — but it's not solved.</p>
+<hr />
+<h3>Limitation 4: No Persistent Memory (Goldfish Problem)</h3>
+<p><strong>What it is:</strong> Every conversation starts from zero. The model has no memory of previous interactions with the same user unless you explicitly provide that context.</p>
+<p><strong>Analogy:</strong> Imagine a brilliant consultant who gives great advice — but every time you call, they have total amnesia. You have to re-explain your company, your goals, and everything you discussed last time.</p>
+<p><strong>Real-world impact:</strong>
+- <strong>ChatGPT's memory feature:</strong> OpenAI added a "memory" layer that stores user facts between conversations — but this is an engineering solution built <em>on top of</em> the model, not an intrinsic capability.
+- <strong>Customer support:</strong> A user contacts your AI support bot for the 5th time about the same billing issue. Without memory engineering, the bot has no idea about the previous 4 conversations.
+- <strong>Personalization:</strong> AI assistants can't learn user preferences over time without external memory systems.</p>
+<p><strong>What this means architecturally:</strong> You need to build memory yourself — user profiles, conversation history databases, retrieval systems that inject relevant past context into each prompt. This is a significant engineering investment.</p>
+<hr />
+<h3>Limitation 5: No Real-World Interaction (Locked in a Box)</h3>
+<p><strong>What it is:</strong> Base models can only read text in and write text out. They cannot browse the web, run code, access databases, call APIs, send emails, or interact with any external system.</p>
+<p><strong>Why this matters:</strong> A PM might imagine "the AI will check our inventory database and respond to the customer." But the <em>model</em> can't do any of that. Engineers have to build:
+- <strong>Tool calling / function calling:</strong> The model outputs a structured request (e.g., "call function <code>check_inventory(product_id=X)</code>"), and your application layer actually executes it
+- <strong>Agents:</strong> Frameworks where the model plans a sequence of tool calls to accomplish a complex task
+- <strong>Plugins / integrations:</strong> Connections to external data sources and services</p>
+<p><strong>Real-world examples:</strong>
+- <strong>ChatGPT Plugins (2023):</strong> OpenAI launched and then deprecated plugins, replacing them with GPTs and function calling — showing how hard it is to get tool use right
+- <strong>Amazon Bedrock Agents:</strong> AWS's framework for giving models access to company APIs and knowledge bases
+- <strong>Google Gemini + Workspace:</strong> Gemini accessing Gmail, Docs, and Calendar isn't the model's native ability — it's Google engineering integration layers</p>
+<hr />
+<h3>Limitation 6: Context Window Constraints</h3>
+<p><strong>What it is:</strong> Models can only process a fixed amount of text at once. Anything beyond the context window is simply invisible to the model.</p>
+<p><strong>Context window sizes (as of early 2025):</strong>
+| Model | Context Window | Rough Page Equivalent |
+|---|---|---|
+| GPT-4o | 128K tokens | ~300 pages |
+| Claude 3.5 Sonnet | 200K tokens | ~500 pages |
+| Gemini 1.5 Pro | 1M tokens | ~2,500 pages |
+| Llama 3.1 405B | 128K tokens | ~300 pages |
+| Mistral Large | 128K tokens | ~300 pages |</p>
+<p><strong>The "lost in the middle" problem:</strong> Even within the context window, models pay less attention to information in the middle of long contexts. Information at the beginning and end gets more attention. Google's research on Gemini and UC Berkeley's research on GPT-4 both confirmed this.</p>
+<p><strong>PM implications:</strong>
+- If your product processes long documents, choose models with large context windows (Gemini 1.5 Pro's 1M tokens is a differentiator)
+- Put the most important information at the beginning or end of the prompt
+- Consider chunking strategies for documents that exceed the context window
+- Longer contexts = higher cost and latency</p>
+<hr />
+<h3>Limitation 7: Safety, Bias, and Alignment Issues</h3>
+<p><strong>What it is:</strong> Models can reflect biases present in training data, generate harmful content if guardrails are circumvented, and behave in ways that don't align with your product's values.</p>
+<p><strong>Real-world examples:</strong>
+- <strong>Gemini image generation (2024):</strong> Generated historically inaccurate images (e.g., diverse Nazi soldiers) due to over-aggressive diversity prompts, leading Google to temporarily pause the feature
+- <strong>GPT-4 jailbreaks:</strong> Users discovered prompts that bypassed safety filters, leading to harmful content generation
+- <strong>Resume screening bias:</strong> AI models used for recruiting have shown bias against certain demographics</p>
+<p><strong>PM responsibilities:</strong>
+- Define your product's safety requirements clearly
+- Implement content filtering and moderation layers
+- Test extensively for bias across user demographics
+- Monitor production outputs for safety violations
+- Build user reporting mechanisms</p>
+<hr />
+<h3>Limitation Summary Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Limitation</th>
+<th>Severity</th>
+<th>Can Be Mitigated?</th>
+<th>Primary Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hallucination</td>
+<td>🔴 Critical</td>
+<td>Partially</td>
+<td>RAG, citations, human review</td>
+</tr>
+<tr>
+<td>Knowledge Cutoff</td>
+<td>🟡 Moderate</td>
+<td>Yes</td>
+<td>RAG, search grounding</td>
+</tr>
+<tr>
+<td>Reasoning Gaps</td>
+<td>🟡 Moderate</td>
+<td>Improving</td>
+<td>Chain-of-thought, code tools, reasoning models</td>
+</tr>
+<tr>
+<td>No Memory</td>
+<td>🟡 Moderate</td>
+<td>Yes</td>
+<td>External memory systems, conversation history</td>
+</tr>
+<tr>
+<td>No Real-World Access</td>
+<td>🟡 Moderate</td>
+<td>Yes</td>
+<td>Tool calling, agents, integrations</td>
+</tr>
+<tr>
+<td>Context Limits</td>
+<td>🟡 Moderate</td>
+<td>Yes</td>
+<td>Chunking, retrieval, model selection</td>
+</tr>
+<tr>
+<td>Safety/Bias</td>
+<td>🔴 Critical</td>
+<td>Partially</td>
+<td>Guardrails, monitoring, testing</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2.3 The Foundation Model as a Building Block</h2>
+<h3>The "Base + Enhancements" Mental Model</h3>
+<p>Think of a foundation model like a <strong>smartphone's base operating system.</strong> iOS or Android out of the box is useful — but the real value comes from:
+- <strong>Apps</strong> (tools and integrations)
+- <strong>Your data</strong> (photos, contacts, files)
+- <strong>Settings and preferences</strong> (personalization)
+- <strong>Accessories</strong> (hardware peripherals)</p>
+<p>Similarly, a foundation model out of the box is impressive but incomplete. The real product value comes from layering enhancements on top:</p>
+<pre><code>┌──────────────────────────────────────────────────────┐
+│  YOUR PRODUCT (User-facing experience)               │
+├──────────────────────────────────────────────────────┤
+│  Guardrails &amp; Safety Layer                           │
+├──────────────────────────────────────────────────────┤
+│  Agent / Orchestration Layer (LangChain, custom)     │
+├──────────────────────────────────────────────────────┤
+│  Tool Integrations (APIs, DBs, Search)               │
+├──────────────────────────────────────────────────────┤
+│  RAG Layer (Your proprietary knowledge)              │
+├──────────────────────────────────────────────────────┤
+│  Prompt Engineering / System Instructions            │
+├──────────────────────────────────────────────────────┤
+│  Fine-tuning Layer (optional, domain-specific)       │
+├──────────────────────────────────────────────────────┤
+│  ┌──────────────────────────────────────────────┐    │
+│  │  FOUNDATION MODEL (GPT-4, Claude, Gemini,   │    │
+│  │  Llama, Mistral)                             │    │
+│  └──────────────────────────────────────────────┘    │
+└──────────────────────────────────────────────────────┘
+</code></pre>
+<p>Each layer gives you leverage to overcome a base model limitation:</p>
+<table>
+<thead>
+<tr>
+<th>Base Limitation</th>
+<th>Enhancement Layer</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hallucination</td>
+<td>RAG + Citations</td>
+<td>Perplexity grounds answers in web sources</td>
+</tr>
+<tr>
+<td>Knowledge cutoff</td>
+<td>Search integration</td>
+<td>Gemini uses Google Search for real-time data</td>
+</tr>
+<tr>
+<td>No memory</td>
+<td>Memory / user profile system</td>
+<td>ChatGPT's memory feature, character.ai's long-term memory</td>
+</tr>
+<tr>
+<td>No tool use</td>
+<td>Function calling + agents</td>
+<td>Expedia's AI travel planner booking flights</td>
+</tr>
+<tr>
+<td>Safety gaps</td>
+<td>Guardrails + content filters</td>
+<td>Anthropic's Constitutional AI, OpenAI's moderation API</td>
+</tr>
+<tr>
+<td>Reasoning limits</td>
+<td>Code interpreter + chain of thought</td>
+<td>ChatGPT Code Interpreter for math problems</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2.4 Foundation Model Comparison for PMs</h2>
+<h3>Major Model Comparison (Early 2025)</h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>GPT-4o (OpenAI)</th>
+<th>Claude 3.5 Sonnet (Anthropic)</th>
+<th>Gemini 1.5 Pro (Google)</th>
+<th>Llama 3.1 405B (Meta)</th>
+<th>Mistral Large (Mistral)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Strengths</strong></td>
+<td>Broadest capabilities, strong at code, excellent tool use</td>
+<td>Best at long documents, nuanced writing, safety-conscious, strong coding</td>
+<td>Massive context window (1M), multimodal, Google ecosystem</td>
+<td>Open-source, self-hostable, strong performance</td>
+<td>Open-weight, EU-based, efficient, strong multilingual</td>
+</tr>
+<tr>
+<td><strong>Weaknesses</strong></td>
+<td>Expensive at scale, closed-source</td>
+<td>Slightly weaker on math/code vs GPT-4, more conservative</td>
+<td>Inconsistent quality vs GPT-4/Claude, less mature API ecosystem</td>
+<td>Requires infrastructure to self-host, slightly behind on benchmarks</td>
+<td>Smaller community, less mature tooling</td>
+</tr>
+<tr>
+<td><strong>Context Window</strong></td>
+<td>128K</td>
+<td>200K</td>
+<td>1M</td>
+<td>128K</td>
+<td>128K</td>
+</tr>
+<tr>
+<td><strong>Multimodal</strong></td>
+<td>Text, image, audio, video</td>
+<td>Text, image</td>
+<td>Text, image, audio, video</td>
+<td>Text, image</td>
+<td>Text, image</td>
+</tr>
+<tr>
+<td><strong>Best For</strong></td>
+<td>General-purpose, complex reasoning, code generation</td>
+<td>Long-form content, analysis, safety-critical applications</td>
+<td>Data-heavy applications, Google Workspace integration, ultra-long context</td>
+<td>On-premises deployment, cost-sensitive at scale, customization</td>
+<td>European data sovereignty, multilingual, cost-efficient</td>
+</tr>
+<tr>
+<td><strong>Pricing (approx input/output per 1M tokens)</strong></td>
+<td>$2.50 / $10</td>
+<td>$3 / $15</td>
+<td>$1.25 / $5</td>
+<td>Free (self-hosted infra costs)</td>
+<td>$2 / $6</td>
+</tr>
+<tr>
+<td><strong>API Maturity</strong></td>
+<td>⭐⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐⭐</td>
+<td>⭐⭐⭐ (via providers)</td>
+<td>⭐⭐⭐</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2.5 The Model Selection Framework</h2>
+<p>When choosing a foundation model for a product, use this decision framework:</p>
+<h3>Step 1: Define Your Requirements</h3>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Questions to Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Task type</strong></td>
+<td>Conversational? Analytical? Creative? Code generation?</td>
+</tr>
+<tr>
+<td><strong>Quality bar</strong></td>
+<td>What error rate is acceptable? What's the cost of a mistake?</td>
+</tr>
+<tr>
+<td><strong>Latency</strong></td>
+<td>Does the user expect real-time response (&lt;2s) or can they wait?</td>
+</tr>
+<tr>
+<td><strong>Volume</strong></td>
+<td>How many requests per day/month?</td>
+</tr>
+<tr>
+<td><strong>Data sensitivity</strong></td>
+<td>Can data leave your infrastructure? Regulatory requirements?</td>
+</tr>
+<tr>
+<td><strong>Modalities</strong></td>
+<td>Text only? Need image/audio/video understanding?</td>
+</tr>
+<tr>
+<td><strong>Context needs</strong></td>
+<td>How much input data per request?</td>
+</tr>
+<tr>
+<td><strong>Languages</strong></td>
+<td>Which languages must be supported?</td>
+</tr>
+</tbody>
+</table>
+<h3>Step 2: Apply the Cost–Latency–Quality Triangle</h3>
+<pre><code>              QUALITY
+               /\
+              /  \
+             /    \
+            / Pick \
+           / Two    \
+          /          \
+         /____________\
+      COST           LATENCY
+      (Low)          (Fast)
+</code></pre>
+<p><strong>You can optimize for two of three. The third will suffer.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Optimization</th>
+<th>Result</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>High Quality + Low Latency</td>
+<td>💰 Expensive</td>
+<td>GPT-4o for real-time premium support → high API costs</td>
+</tr>
+<tr>
+<td>High Quality + Low Cost</td>
+<td>🐌 Slow</td>
+<td>Batch processing with GPT-4o → queue and run overnight</td>
+</tr>
+<tr>
+<td>Low Cost + Low Latency</td>
+<td>📉 Lower Quality</td>
+<td>GPT-4o-mini or Llama 3 8B → fast and cheap but less capable</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PM Strategy: Tiered Model Architecture</strong></p>
+<p>The best AI products don't use one model — they route requests to different models based on complexity:</p>
+<ul>
+<li><strong>Tier 1 (Simple queries):</strong> Small/fast model (GPT-4o-mini, Claude Haiku, Gemini Flash) — $0.15/1M input tokens, &lt;500ms latency</li>
+<li><strong>Tier 2 (Standard queries):</strong> Mid-tier model (GPT-4o, Claude Sonnet, Gemini Pro) — $2-3/1M input tokens, 1-3s latency</li>
+<li><strong>Tier 3 (Complex reasoning):</strong> Premium model (GPT-4o, o1, Claude Opus) — $10-15/1M input tokens, 5-30s latency</li>
+</ul>
+<p><strong>Real-world example:</strong> Notion AI reportedly uses this tiered approach — simple formatting tasks use a smaller model, while complex writing tasks use a more powerful one. This can reduce costs by 60-80% while maintaining quality where it matters.</p>
+<h3>Step 3: Evaluate Against Your Use Case</h3>
+<p>Run a structured evaluation (or "eval"):
+1. Create 100+ representative test cases from real user queries
+2. Run each test case against 2-3 candidate models
+3. Have domain experts grade outputs on a rubric (accuracy, completeness, tone, safety)
+4. Calculate cost per query for each model
+5. Measure latency (P50, P95, P99) for each model
+6. Make a data-driven decision</p>
+<p><strong>Do not choose a model based on benchmark leaderboards alone.</strong> Benchmarks like MMLU, HumanEval, and HellaSwag measure narrow capabilities. Your product has specific needs that may not correlate with benchmark rankings.</p>
+<hr />
+<h2>2.6 Build vs. Buy Decision Framework</h2>
+<h3>The Spectrum</h3>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Description</th>
+<th>When to Use</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Use an API (Buy)</strong></td>
+<td>Call OpenAI/Anthropic/Google APIs directly</td>
+<td>Most products. Fast to market, lowest upfront cost.</td>
+<td>Intercom using GPT-4 for support bots</td>
+</tr>
+<tr>
+<td><strong>Fine-tune a hosted model</strong></td>
+<td>Customize a provider's model on your data</td>
+<td>When you need domain-specific behavior that prompting can't achieve</td>
+<td>A medical company fine-tuning GPT-4 on clinical guidelines</td>
+</tr>
+<tr>
+<td><strong>Deploy an open-source model</strong></td>
+<td>Self-host Llama, Mistral, or similar</td>
+<td>Data sovereignty requirements, very high volume (API costs prohibitive), need full control</td>
+<td>A European bank deploying Mistral on-premises for regulatory compliance</td>
+</tr>
+<tr>
+<td><strong>Train from scratch</strong></td>
+<td>Build your own foundation model</td>
+<td>Almost never. Only if you're Google, Meta, or a well-funded AI lab.</td>
+<td>Bloomberg training BloombergGPT on financial data</td>
+</tr>
+</tbody>
+</table>
+<h3>Decision Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Use API</th>
+<th>Fine-tune</th>
+<th>Self-Host Open Source</th>
+<th>Train from Scratch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Time to market</strong></td>
+<td>Days-weeks</td>
+<td>Weeks-months</td>
+<td>Months</td>
+<td>Years</td>
+</tr>
+<tr>
+<td><strong>Upfront cost</strong></td>
+<td>~$0</td>
+<td>$1K-100K</td>
+<td>$100K-1M+ (infra)</td>
+<td>$10M-100M+</td>
+</tr>
+<tr>
+<td><strong>Ongoing cost</strong></td>
+<td>Per-token API fees</td>
+<td>Per-token + fine-tuning cost</td>
+<td>Infrastructure + ops</td>
+<td>Infrastructure + ops + research</td>
+</tr>
+<tr>
+<td><strong>Data privacy</strong></td>
+<td>Data sent to provider</td>
+<td>Data sent for fine-tuning</td>
+<td>Full control</td>
+<td>Full control</td>
+</tr>
+<tr>
+<td><strong>Customization</strong></td>
+<td>Prompt engineering only</td>
+<td>Moderate</td>
+<td>High</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td><strong>Maintenance</strong></td>
+<td>Provider handles updates</td>
+<td>Re-fine-tune periodically</td>
+<td>You manage everything</td>
+<td>You manage everything</td>
+</tr>
+<tr>
+<td><strong>Team needed</strong></td>
+<td>PM + 1-2 engineers</td>
+<td>PM + ML engineer</td>
+<td>ML team + infra team</td>
+<td>Large ML research team</td>
+</tr>
+</tbody>
+</table>
+<h3>PM Decision Rule of Thumb</h3>
+<pre><code>START with API → PROVE product-market fit → OPTIMIZE with fine-tuning or self-hosting IF needed
+</code></pre>
+<p><strong>Do not start with self-hosting or training from scratch.</strong> 90%+ of AI products should start with API access. You can always move to fine-tuning or self-hosting after you've validated that:
+1. Users want the product
+2. The API approach has clear, measurable limitations you can't solve with prompt engineering or RAG
+3. You have the data and team to justify the investment</p>
+<p><strong>Real-world example:</strong> Duolingo started by integrating GPT-4 via API for its "Explain My Answer" and "Roleplay" features (Duolingo Max). They didn't build their own model. They validated user demand first, then optimized.</p>
+<hr />
+<h2>2.7 PM Action Items &amp; Exercises</h2>
+<h3>Exercise 1: Token Cost Calculator</h3>
+<p>Pick a product feature you've shipped (or want to build). Estimate:
+- Average tokens per user query (input)
+- Average tokens per AI response (output)
+- Expected daily active users
+- Queries per user per day</p>
+<p>Calculate: <strong>Monthly API cost = (input_tokens × input_price + output_tokens × output_price) × queries_per_user × DAU × 30</strong></p>
+<p>Now calculate the same cost using three different models (GPT-4o, Claude Sonnet, Gemini Flash). What's the difference?</p>
+<h3>Exercise 2: Hallucination Audit</h3>
+<p>Take an AI-powered feature in a product you use (ChatGPT, Perplexity, Gemini, Copilot). Ask it 10 factual questions in your domain of expertise. For each answer:
+- Is it correct?
+- Is it confident?
+- Would an average user be able to detect if it's wrong?
+- What would the business consequence be if wrong?</p>
+<h3>Exercise 3: Limitation Mapping</h3>
+<p>For a product you're working on (or a product you admire), fill in this table:</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Which Limitation Is Most Dangerous?</th>
+<th>Current Mitigation</th>
+<th>Gap</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Feature 1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Feature 2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Feature 3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>Exercise 4: Model Selection</h3>
+<p>You're the PM for a customer support chatbot at a large e-commerce company (think Amazon scale). Walk through the Model Selection Framework:
+1. Define your requirements using the Step 1 table
+2. Where do you sit on the Cost-Latency-Quality triangle?
+3. Which 2-3 models would you evaluate?
+4. What would your tiered architecture look like?
+5. Build vs. Buy — where do you start and how do you evolve?</p>
+<hr />
+<h2>2.8 Discussion Questions</h2>
+<ol>
+<li>
+<p><strong>The Hallucination Dilemma:</strong> Your CEO wants to launch an AI-powered financial advisor that gives personalized investment recommendations. The best model you've tested still hallucates ~3% of the time. How do you think about the risk? What guardrails would you require before launch? Would you launch at all?</p>
+</li>
+<li>
+<p><strong>Open vs. Closed Models:</strong> Meta's strategy is to release Llama as open-source, while OpenAI keeps GPT-4 closed. What are the product implications of building on each? How does this affect your competitive moat? What happens if OpenAI changes pricing by 5x?</p>
+</li>
+<li>
+<p><strong>The Context Window Race:</strong> Google's Gemini can process 1M tokens (a few books). Does this change what products are possible? What use cases were impossible at 4K tokens that are now viable at 1M? Is "just make the context window bigger" a substitute for better retrieval systems?</p>
+</li>
+<li>
+<p><strong>Vendor Lock-in:</strong> You've built your product on GPT-4's API with heavy prompt engineering specific to GPT-4's behavior. Anthropic releases a model that's 50% cheaper with comparable quality. How hard is it to switch? What would you do differently from the start to maintain model portability?</p>
+</li>
+<li>
+<p><strong>The "Good Enough" Model:</strong> When is a smaller, cheaper model (GPT-4o-mini, Llama 8B) actually the <em>better</em> product choice than the most powerful model? Can "worse" AI create a "better" product?</p>
+</li>
+<li>
+<p><strong>Cost at Scale:</strong> Your AI feature costs $0.02 per query. You have 10M DAU making 5 queries/day. That's $1M/day in API costs. How do you make the unit economics work? What levers do you have?</p>
+</li>
+</ol>
+<hr />
+<h2>2.9 Key Takeaways</h2>
+<ol>
+<li>
+<p><strong>LLMs are next-token predictors, not thinking machines.</strong> They generate statistically likely text. Understanding this explains most of their failure modes and helps you set correct user expectations.</p>
+</li>
+<li>
+<p><strong>The three training phases shape the product.</strong> Pre-training gives knowledge, instruction-tuning gives behavior, RLHF gives alignment. Each phase is a lever that determines how the model behaves in your product.</p>
+</li>
+<li>
+<p><strong>Seven critical limitations define your product's risk surface.</strong> Hallucination, knowledge cutoff, reasoning gaps, no persistent memory, no real-world interaction, context limits, and safety/bias. Every feature should be mapped against these limitations with explicit mitigation plans.</p>
+</li>
+<li>
+<p><strong>Foundation models are building blocks, not finished products.</strong> The value you create as a PM comes from the enhancement layers you add on top: RAG, tools, memory, guardrails, and orchestration. The model is the foundation — not the house.</p>
+</li>
+<li>
+<p><strong>Model selection is a product decision, not just a technical one.</strong> It affects cost, quality, latency, data privacy, vendor lock-in, and user experience. Use the Cost–Latency–Quality triangle and tiered architecture to make informed decisions.</p>
+</li>
+<li>
+<p><strong>Start with APIs, prove value, then optimize.</strong> Don't over-invest in self-hosting or fine-tuning before you've validated product-market fit. The "Build vs. Buy" spectrum is a journey, not a one-time choice.</p>
+</li>
+<li>
+<p><strong>The model landscape changes every 3-6 months.</strong> What's frontier today will be mid-tier tomorrow. Design your product architecture to be model-agnostic wherever possible. Your competitive moat comes from your data, your UX, and your integration layers — not from which model you use.</p>
+</li>
+</ol>
+<hr />
+            </div>
+
+            <div class="section-nav">
+                <a href="section-1.html"><i class="fas fa-arrow-left"></i> Section 1</a>
+                <a href="section-3.html">Section 3 <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Nikhil Kumar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
