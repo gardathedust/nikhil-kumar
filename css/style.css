@@ -474,8 +474,11 @@ body {
     flex-direction: column;
     cursor: pointer;
     gap: 5px;
-    padding: 4px;
+    padding: 8px;
     z-index: 1001;
+    background: none;
+    border: none;
+    outline: none;
 }
 
 .hamburger span {
@@ -567,10 +570,7 @@ body {
     
     .nav-container {
         padding: 1rem;
-    }
-    
-    .nav-links {
-        gap: 1rem;
+        position: relative;
     }
     
     .posts-grid,
